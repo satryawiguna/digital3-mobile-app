@@ -1,0 +1,33 @@
+<ion-content (swipeleft)="swipeLeftEvent($event)" (swiperight)="swipeRightEvent($event)">
+  <ion-toolbar>
+    <ion-buttons left *ngIf="slide.previous">
+      <button ion-button color="primary" (click)="previousSlide()">
+        <ion-icon ios="ios-arrow-back" md="md-arrow-back"></ion-icon>&nbsp;
+        Previous
+      </button>
+    </ion-buttons>
+    <ion-buttons right *ngIf="slide.next">
+      <button ion-button color="primary" (click)="nextSlide()">
+        Next&nbsp;
+        <ion-icon ios="ios-arrow-forward" md="md-arrow-forward"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+  <ion-slides>
+    <ion-slide style="background: url('assets/images/1.jpg') no-repeat center center; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;">
+      <h2 class="intro-header">Welcome</h2>
+      <h4 class="intro-header">Bali's widest selection for movies and tv series catalogue</h4>
+      <br /><br />
+      <img src="assets/images/logo.png" class="logo" style="width: 50%;">
+    </ion-slide>
+    <ion-slide style="background: url('assets/images/2.jpg') no-repeat center center; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;">
+    </ion-slide>
+    <ion-slide style="background: url('assets/images/3.jpg') no-repeat center center; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;">
+    </ion-slide>
+    <ion-slide style="background: url('assets/images/4.jpg') no-repeat center center; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;">
+      <h2 class="intro-header shadow">Ready to Rock</h2>
+      <br />
+      <button ion-button large type="button" (click)="letsGo()">Let's Go!</button>
+    </ion-slide>
+  </ion-slides>
+</ion-content>

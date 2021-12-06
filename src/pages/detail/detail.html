@@ -1,0 +1,75 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{ movieService.item?.title }}</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+  <h2>{{ movieService.item?.title }}</h2>
+  <ion-icon name="md-pricetag" *ngIf="movieService.item?.product_tag.length != 0"></ion-icon>&nbsp;<span *ngFor="let product_tag of movieService.item?.product_tag; let last = last">{{ product_tag.name }}<span *ngIf="!last">,&nbsp;</span></span>
+  <br />
+  <img [src]="movieService.item?.featured_image_url" width="100%">
+  <ion-grid>
+    <ion-row>
+      <ion-col col-4><label><strong>ID</strong></label></ion-col>
+      <ion-col col-1><label><strong>:</strong></label></ion-col>
+      <ion-col col-7><span>{{ movieService.item?.id }}</span></ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-4><label><strong>Type</strong></label></ion-col>
+      <ion-col col-1><label><strong>:</strong></label></ion-col>
+      <ion-col col-7><span>{{ movieService.item?.product_type.name }}</span></ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-4><label><strong>Genre</strong></label></ion-col>
+      <ion-col col-1><label><strong>:</strong></label></ion-col>
+      <ion-col col-7><span *ngFor="let product_genre of movieService.item?.product_genre; let last = last">{{ product_genre.name }}<span *ngIf="!last">,&nbsp;</span></span></ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-4><label><strong>Year</strong></label></ion-col>
+      <ion-col col-1><label><strong>:</strong></label></ion-col>
+      <ion-col col-7><span>{{ movieService.item?.year }}</span></ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-4><label><strong>Rating</strong></label></ion-col>
+      <ion-col col-1><label><strong>:</strong></label></ion-col>
+      <ion-col col-7>
+        <div style="font-size: 8px;">
+          <rating [(ngModel)]="rating"
+                [readonly]="true">
+          </rating>
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-4><label><strong>Duration</strong></label></ion-col>
+      <ion-col col-1><label><strong>:</strong></label></ion-col>
+      <ion-col col-7><span>{{ movieService.item?.duration }}</span></ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-4><label><strong>Director</strong></label></ion-col>
+      <ion-col col-1><label><strong>:</strong></label></ion-col>
+      <ion-col col-7><span>{{ movieService.item?.director }}</span></ion-col>
+    </ion-row>
+  </ion-grid>
+  <br />
+  <ion-card>
+    <ion-card-header>
+      <strong>Description</strong>
+    </ion-card-header>
+    <ion-card-content>
+      {{ movieService.item?.description }}
+    </ion-card-content>
+  </ion-card>
+  <br />
+  <ion-card>
+    <ion-card-header>
+      <strong>Actors</strong>
+    </ion-card-header>
+    <ion-card-content>
+      {{ movieService.item?.actors }}
+    </ion-card-content>
+  </ion-card>
+  <br />
+  <button ion-button block (click)="addToCart(movieService.item)">Add to cart</button>
+  <button ion-button block outline (click)="viewCart()">View cart</button>
+</ion-content>

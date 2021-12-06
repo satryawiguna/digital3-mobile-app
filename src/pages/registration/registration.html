@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Registration</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <form [formGroup]="signupCredentials" (ngSubmit)="registration()">
+    <ion-list no-margin>
+      <ion-item no-padding style="border-top: none;">
+        <ion-label floating>Email</ion-label>
+        <ion-input type="text" formControlName="email" [(ngModel)]="signupCredentials.email"></ion-input>
+      </ion-item>
+      <ion-item no-padding style="border-top: none;">
+        <ion-label floating>Password</ion-label>
+        <ion-input type="password" formControlName="password" [(ngModel)]="signupCredentials.password"></ion-input>
+      </ion-item>
+      <ion-item no-padding style="border-top: none;">
+        <ion-label floating>Confirm Password</ion-label>
+        <ion-input type="password" formControlName="confirmPassword" [(ngModel)]="signupCredentials.confirmPassword"></ion-input>
+      </ion-item>
+    </ion-list>
+    <br /><br />
+    <p *ngIf="email.hasError('required') && email.touched">Email is required</p>
+    <p *ngIf="email.hasError('pattern') && email.touched">Invalid email format <i>(youremail@domain)</i></p>
+    <p *ngIf="password.hasError('required') && password.touched">Password is required</p>
+    <p *ngIf="password.hasError('minlength') && password.touched">Invalid password length <i>(minimum 6)</i></p>
+    <p *ngIf="confirmPassword.hasError('equalTo') && confirmPassword.touched">Password doesn't match</p>
+    <br />
+    <button ion-button block type="submit" [disabled]="signupCredentials.invalid">Sign Up</button>
+  </form>
+  <br /><br />
+  <ion-card>
+    <ion-card-header>
+      <strong>Note</strong>
+    </ion-card-header>
+    <ion-card-content>
+      After sign up, please check your email for activation and sign in to complete your order
+    </ion-card-content>
+  </ion-card>
+</ion-content>

@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Cart</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <div *ngIf="carts == null || carts?.length == 0" style="text-align: center; color: #ccc;">
+    <ion-icon ios="ios-cart" md="md-cart" style="font-size: 60px;"></ion-icon>
+    <h2>Cart is empty...</h2>
+  </div>
+  <div *ngIf="carts != null && carts?.length > 0">
+    <ion-grid>
+      <ion-row style="background-color: #f8f8f8;">
+        <ion-col col-9><label><strong>Item</strong></label></ion-col>
+        <ion-col col-3><label><strong>Action</strong></label></ion-col>
+      </ion-row>
+      <ion-row *ngFor="let cart of carts; let i = index">
+        <ion-col col-9>
+          <ion-grid no-padding>
+            <ion-row>
+              <ion-col col-2>
+                <img [src]="cart.featured_image_url" width="25"/>
+              </ion-col>
+              <ion-col col-10 style="padding-left: 5px;">
+                {{ cart.title }}
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-col>
+        <ion-col col-3>
+            <button ion-button clear (click)="removeItem(i)"><ion-icon ios="ios-trash" md="md-trash" style="font-size: 25px;"></ion-icon></button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <br /><br />
+    <button ion-button block (click)="checkOut()">Check out</button>
+    <button ion-button block outline (click)="clearCart()">Clear cart</button>
+  </div>
+</ion-content>

@@ -1,0 +1,94 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Checkout</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <h2>Order Summary</h2>
+  <ion-list>
+    <ion-item>
+      <ion-icon ios="ios-videocam" md="md-videocam" item-left></ion-icon>
+      Total of movies
+      <div item-right>{{ total.movies }}</div>
+    </ion-item>
+    <ion-item>
+      <ion-icon ios="ios-desktop" md="md-desktop" item-left></ion-icon>
+      Total of tv series
+      <div item-right>{{ total.tvSeries }}</div>
+    </ion-item>
+  </ion-list>
+  <ion-card>
+    <ion-card-header>
+      <strong>Note</strong>
+    </ion-card-header>
+    <ion-card-content>
+      We will send you confirmation price immediately after finish your checkout process
+    </ion-card-content>
+  </ion-card>
+  <br /><br />
+  <form [formGroup]="checkoutCredentials" (ngSubmit)="sendOrder()">
+    <ion-list no-margin>
+      <ion-item no-padding style="border-top: none;">
+        <ion-label floating>Name</ion-label>
+        <ion-input type="text" formControlName="name" [(ngModel)]="checkoutCredentials.name"></ion-input>
+      </ion-item>
+      <ion-item no-padding style="border-top: none;">
+        <ion-label floating>Email</ion-label>
+        <ion-input type="text" formControlName="email" [(ngModel)]="checkoutCredentials.email" disabled></ion-input>
+      </ion-item>
+      <ion-item no-padding style="border-top: none;">
+        <ion-label floating>Place of Stay</ion-label>
+        <ion-textarea formControlName="place_of_stay" fz-elastic [(ngModel)]="checkoutCredentials.place_of_stay"></ion-textarea>
+      </ion-item>
+      <ion-item no-padding style="border-top: none;">
+        <ion-label floating>Phone</ion-label>
+        <ion-input type="text" formControlName="phone" [(ngModel)]="checkoutCredentials.phone"></ion-input>
+      </ion-item>
+      <ion-item no-padding style="border-top: none;">
+        <ion-label floating>Payment Method</ion-label>
+        <ion-select formControlName="payment_method" [(ngModel)]="checkoutCredentials.payment_method">
+          <ion-option value="Cash On Delivery">Cash on Delivery</ion-option>
+          <ion-option value="Bank Transfer">Bank Transfer</ion-option>
+          <ion-option value="Paypal">Paypal</ion-option>
+          <ion-option value="Pay at The Store">Pay at The Store</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item no-padding style="border-top: none;">
+        <ion-label floating>Delivery / Pickup</ion-label>
+        <ion-select formControlName="delivery_or_pickup" [(ngModel)]="checkoutCredentials.delivery_or_pickup">
+          <ion-option value="Delivery">Delivery</ion-option>
+          <ion-option value="Pickup @ Legian Store">Pickup @ Legian Store</ion-option>
+          <ion-option value="Pickup @ Poppies 1 Store">Pickup @ Poppies 1 Store</ion-option>
+          <ion-option value="Pickup @ Discovery Mall Store">Pickup @ Discovery Mall Store</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item no-padding style="border-top: none;">
+        <ion-label floating>Type of Device</ion-label>
+        <ion-select formControlName="type_of_device" [(ngModel)]="checkoutCredentials.type_of_device">
+          <ion-option value="Flash Disk">Flash Disk</ion-option>
+          <ion-option value="Hard Drive">Hard Drive</ion-option>
+          <ion-option value="SD Card">SD Card</ion-option>
+          <ion-option value="Phone">Phone</ion-option>
+          <ion-option value="Tablet">Tablet</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item no-padding style="border-top: none;">
+        <ion-label floating>Additional Note</ion-label>
+        <ion-textarea formControlName="additional_note" fz-elastic [(ngModel)]="checkoutCredentials.additional_note"></ion-textarea>
+      </ion-item>
+    </ion-list>
+    <br /><br />
+    <p *ngIf="name.hasError('required') && name.touched">Name is required</p>
+    <p *ngIf="email.hasError('required') && email.touched">Email is required</p>
+    <p *ngIf="email.hasError('pattern') && email.touched">Invalid email format <i>(youremail@domain)</i></p>
+    <p *ngIf="place_of_stay.hasError('required') && place_of_stay.touched">Place of Stay is required</p>
+    <p *ngIf="phone.hasError('required') && phone.touched">Phone is required</p>
+    <p *ngIf="phone.hasError('pattern') && phone.touched">Invalid phone format <i>(08123665507)</i></p>
+    <p *ngIf="payment_method.hasError('required') && payment_method.touched">Payment method is required</p>
+    <p *ngIf="delivery_or_pickup.hasError('required') && delivery_or_pickup.touched">Delivery or pickup is required</p>
+    <p *ngIf="type_of_device.hasError('required') && type_of_device.touched">Type of device is required</p>
+    <br />
+    <button ion-button block type="submit" [disabled]="!checkoutCredentials.valid">Send Order</button>
+  </form>
+</ion-content>

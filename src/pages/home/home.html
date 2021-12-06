@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Digital 3</ion-title>
+    <ion-buttons right>
+      <button ion-button icon-only (click)="openModal($event)">
+        <ion-icon name="md-arrow-round-down"></ion-icon>
+      </button>
+      <button ion-button icon-only (click)="openPopOver($event)">
+        <ion-icon name="options"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <ion-searchbar [(ngModel)]="movieService.search" [debounce]="1000" (ionInput)="setFilteredItems()"></ion-searchbar>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <div *ngIf="movieService.isGridView">
+    <ion-grid>
+      <ion-row wrap>
+        <ion-col col-3 *ngFor="let movie of movieService.movies" (click)="openDetail(movie.id)">
+          <img [src]="movie.featured_image_url" style="width:100%; height:100%;">
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+  <div *ngIf="!movieService.isGridView">
+    <ion-list>
+      <ion-item-sliding *ngFor="let movie of movieService.movies">
+        <ion-item (click)="openDetail(movie.id)">
+          <ion-avatar item-left>
+            <img [src]="movie.featured_image_url" style="border-radius:0;">
+          </ion-avatar>
+          <h2>{{ movie.title }}</h2>
+        </ion-item>
+        <ion-item-options side="right">
+          <button ion-button (click)="addToCart(movie)">Add to cart</button>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
+  </div>
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+   <ion-infinite-scroll-content></ion-infinite-scroll-content>
+ </ion-infinite-scroll>
+ <ion-fab right bottom>
+   <button ion-fab color="primary" (click)="viewCart()"><ion-icon ios="ios-cart" md="md-cart"></ion-icon></button>
+ </ion-fab>
+</ion-content>

@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Login</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <form [formGroup]="signinCredentials" (ngSubmit)="login()">
+    <ion-list no-margin>
+      <ion-item no-padding style="border-top: none;">
+        <ion-label floating>Email</ion-label>
+        <ion-input type="text" formControlName="email" [(ngModel)]="signinCredentials.email"></ion-input>
+      </ion-item>
+      <ion-item no-padding style="border-top: none;">
+        <ion-label floating>Password</ion-label>
+        <ion-input type="password" formControlName="password" [(ngModel)]="signinCredentials.password"></ion-input>
+      </ion-item>
+    </ion-list>
+    <br /><br />
+    <p *ngIf="email.hasError('required') && email.touched">Email is required</p>
+    <p *ngIf="email.hasError('pattern') && email.touched">Invalid email format <i>(youremail@domain)</i></p>
+    <p *ngIf="password.hasError('required') && password.touched">Password is required</p>
+    <br />
+    <button ion-button block type="submit" [disabled]="!signinCredentials.valid">Sign In</button>
+  </form>
+  <br /><br />
+  <button ion-button clear (click)="registration()">Sign Up</button><br />
+  <button ion-button clear (click)="forgotPassword()">Forgot Password</button>
+</ion-content>

@@ -1,0 +1,24 @@
+<ion-menu [content]="content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Menu</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-list no-lines>
+      <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
+        <ion-icon ios="{{p.ios_icon}}" md="{{p.android_icon}}" style="font-size: 30px; float: left;"></ion-icon>&nbsp;
+        <h2 style="float: left; margin-top: 5px; margin-left: 10px;">{{p.title}}</h2>
+      </button>
+    </ion-list>
+    <ion-list no-lines>
+      <button menuClose ion-item (click)="openPriceList('http://api.digital3bali.com/home/priceList')">
+        <ion-icon ios="ios-list-box" md="md-list-box" style="font-size: 30px; float: left;"></ion-icon>&nbsp;
+        <h2 style="float: left; margin-top: 5px; margin-left: 10px;">Price List</h2>
+      </button>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
+<!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
+<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>
